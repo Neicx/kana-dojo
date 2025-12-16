@@ -97,15 +97,15 @@ const MobileBottomBar = () => {
 
   return (
     <div
-      id="main-bottom-bar"
+      id='main-bottom-bar'
       className={clsx(
-        'fixed bottom-0 left-0 right-0 z-50 max-md:hidden',
+        'fixed bottom-0 left-0 right-0 z-50 max-lg:hidden',
         'bg-[var(--background-color)] border-t-1 border-[var(--border-color)]',
         'px-4 py-1 flex items-center justify-between',
         expandDecorations && 'hidden'
       )}
     >
-      <div className="flex items-center gap-3">
+      <div className='flex items-center gap-3'>
         {socialLinks.map((link, idx) => {
           const Icon = link.icon as LucideIcon;
           const isDonate = link.special === 'donate';
@@ -124,7 +124,7 @@ const MobileBottomBar = () => {
               {link.type === 'fontawesome' ? (
                 <FontAwesomeIcon
                   icon={link.icon as IconDefinition}
-                  size="sm"
+                  size='sm'
                   className={clsx(
                     baseIconClasses,
                     pulseClasses,
@@ -145,7 +145,7 @@ const MobileBottomBar = () => {
                 />
               )}
               {idx === 1 && socialLinks.length > 2 && (
-                <span className="text-sm text-[var(--secondary-color)] select-none">
+                <span className='text-sm text-[var(--secondary-color)] select-none'>
                   ~
                 </span>
               )}
@@ -154,11 +154,11 @@ const MobileBottomBar = () => {
         })}
       </div>
 
-      <div className="flex items-center gap-2 text-xs text-[var(--secondary-color)]">
+      <div className='flex items-center gap-2 text-xs text-[var(--secondary-color)]'>
         {infoItems.map((item, idx) => {
           const isVersionItem = idx === infoItems.length - 1;
           const content = (
-            <span className="flex gap-1">
+            <span className='flex gap-1'>
               <item.icon size={16} />
               {item.text}
             </span>
@@ -168,8 +168,8 @@ const MobileBottomBar = () => {
             <React.Fragment key={idx}>
               {isVersionItem ? (
                 <Link
-                  href="/patch-notes"
-                  className="flex gap-1 hover:text-[var(--main-color)] hover:cursor-pointer "
+                  href='/patch-notes'
+                  className='flex gap-1 hover:text-[var(--main-color)] hover:cursor-pointer '
                   onClick={playClick}
                 >
                   <item.icon size={16} />
@@ -179,7 +179,7 @@ const MobileBottomBar = () => {
                 content
               )}
               {idx < infoItems.length - 1 && (
-                <span className="text-sm text-[var(--secondary-color)] select-none">
+                <span className='text-sm text-[var(--secondary-color)] select-none'>
                   ~
                 </span>
               )}
