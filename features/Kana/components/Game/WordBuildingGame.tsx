@@ -444,22 +444,29 @@ const WordBuildingGame = ({
         className={clsx(
           'w-[100vw]',
           'border-t-2 border-[var(--border-color)] bg-[var(--card-color)]',
-          'absolute bottom-0 z-10 px-6 py-6 md:bottom-6',
-          'flex flex-row flex-wrap items-center justify-center gap-6 md:gap-12'
+          'absolute bottom-0 z-10 px-4 py-6 md:bottom-6 md:px-12 md:py-10',
+          'flex flex-row items-center justify-between overflow-hidden'
         )}
       >
-        {/* Feedback message for correct/wrong - Duolingo style */}
-        {showContinue && (
-          <div className='flex items-center gap-3 md:gap-4'>
+        {/* Left Column: Feedback (flex-1) */}
+        <div className='flex flex-1 items-center justify-end pr-3 sm:pr-6 md:pr-12'>
+          <div
+            className={clsx(
+              'flex items-center gap-3 transition-all duration-500 md:gap-4',
+              showContinue
+                ? 'translate-x-0 opacity-100'
+                : 'pointer-events-none -translate-x-8 opacity-0'
+            )}
+          >
             {bottomBarState === 'correct' ? (
-              <CircleCheck className='h-12 w-12 text-[var(--main-color)]' />
+              <CircleCheck className='h-10 w-10 text-[var(--main-color)] sm:h-12 sm:w-12' />
             ) : (
-              <CircleX className='h-12 w-12 text-[var(--secondary-color)]' />
+              <CircleX className='h-10 w-10 text-[var(--secondary-color)] sm:h-12 sm:w-12' />
             )}
             <div className='flex flex-col'>
               <span
                 className={clsx(
-                  'text-xl font-bold',
+                  'text-lg font-bold sm:text-2xl',
                   bottomBarState === 'correct'
                     ? 'text-[var(--main-color)]'
                     : 'text-[var(--secondary-color)]'
@@ -469,23 +476,29 @@ const WordBuildingGame = ({
                   ? 'Nicely done!'
                   : 'Correct solution:'}
               </span>
-              <span className='text-base font-medium text-[var(--secondary-color)]/60'>
+              <span className='text-sm font-medium text-[var(--secondary-color)]/60 sm:text-lg'>
                 {wordData.answerChars.join('')}
               </span>
             </div>
           </div>
-        )}
+        </div>
 
-        <ActionButton
-          ref={buttonRef}
-          borderBottomThickness={12}
-          borderRadius='3xl'
-          className='w-auto min-w-[12rem] px-12 py-4 text-2xl font-medium sm:px-16'
-          onClick={showContinue ? handleContinue : handleCheck}
-          disabled={!canCheck && !showContinue}
-        >
-          <span>{showContinue ? 'continue' : 'check'}</span>
-        </ActionButton>
+        {/* Center Column: Button (flex-none) */}
+        <div className='flex-none'>
+          <ActionButton
+            ref={buttonRef}
+            borderBottomThickness={12}
+            borderRadius='3xl'
+            className='w-auto min-w-[9rem] px-8 py-3 text-xl font-medium sm:min-w-[14rem] sm:px-16 sm:py-4 sm:text-2xl'
+            onClick={showContinue ? handleContinue : handleCheck}
+            disabled={!canCheck && !showContinue}
+          >
+            <span>{showContinue ? 'continue' : 'check'}</span>
+          </ActionButton>
+        </div>
+
+        {/* Right Column: Balanced Spacer (flex-1) */}
+        <div className='flex-1' />
       </div>
 
       {/* Spacer */}
