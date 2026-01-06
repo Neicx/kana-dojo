@@ -241,6 +241,12 @@ const baseThemeSets: BaseThemeGroup[] = [
     icon: Moon,
     themes: [
       {
+        id: 'kumonasu',
+        backgroundColor: 'oklch(19.0% 0.043 302.0 / 1)',   
+        mainColor: 'oklch(93.0% 0.165 265.0 / 1)',         
+        secondaryColor: 'oklch(92.0% 0.140 200.0 / 1)',    
+      },
+      {
         id: 'kuromizu',
         backgroundColor: 'oklch(10.6% 0.034 248.0 / 1)',
         mainColor: 'oklch(74.8% 0.182 305.5 / 1)',
