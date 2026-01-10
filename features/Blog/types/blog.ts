@@ -16,6 +16,7 @@ export type Category =
   | 'comparison'
   | 'tutorial'
   | 'resources'
+  | 'study-tips'
   | 'jlpt';
 
 /**
@@ -107,6 +108,7 @@ export const VALID_CATEGORIES: Category[] = [
   'comparison',
   'tutorial',
   'resources',
+  'study-tips',
   'jlpt'
 ];
 
