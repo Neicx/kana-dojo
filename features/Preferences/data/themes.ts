@@ -1088,6 +1088,11 @@ const baseThemeSets: BaseThemeGroup[] = [
         secondaryColor: 'oklch(68.0% 0.205 30.0 / 1)',
       },
       {
+        id: 'bamboo-forest',
+        backgroundColor: 'oklch(21.0% 0.045 155.0 / 1)',
+        mainColor: 'oklch(70.0% 0.145 150.0 / 1)',
+        secondaryColor: 'oklch(78.0% 0.095 140.0 / 1)',
+      },{
         id: 'kimono-silk',
         backgroundColor: 'oklch(19.0% 0.048 320.0 / 1)',
         mainColor: 'oklch(72.0% 0.155 330.0 / 1)',
