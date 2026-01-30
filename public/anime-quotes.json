@@ -159,5 +159,14 @@
   "english": "Mama mama mama.",
   "anime": "One Piece",
   "character": "Charlotte Linlin (Big Mom)"
+},
+  {
+  "anime": "JoJo's Bizarre Adventure: Stardust Crusaders",
+  "character": "Noriaki Kakyoin",
+  "quote": {
+    "japanese": "レロレロレロレロ",
+    "romaji": "Rero rero rero rero",
+    "english": "Rero rero rero rero."
+  }
 }
 ]
