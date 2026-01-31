@@ -79,7 +79,7 @@ export default function StreakProgress() {
                     playClick();
                   }}
                   className={cn(
-                    'relative z-10 flex cursor-pointer items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-semibold transition-colors duration-300',
+                    'relative z-10 flex cursor-pointer items-center gap-2 rounded-2xl px-5 pt-3 pb-5 text-sm font-semibold transition-colors duration-300',
                     isSelected
                       ? 'text-[var(--background-color)]'
                       : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]',

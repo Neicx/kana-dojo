@@ -218,7 +218,7 @@ export default function PreGameScreen({
                         <button
                           onClick={() => handleDifficultyClick(key)}
                           className={clsx(
-                            'relative z-10 flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-2xl px-4 py-2.5 text-sm font-semibold transition-colors duration-300',
+                            'relative z-10 flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-2xl px-4 pt-3 pb-5 text-sm font-semibold transition-colors duration-300',
                             isSelected
                               ? 'text-[var(--background-color)]'
                               : 'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
