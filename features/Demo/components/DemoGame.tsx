@@ -11,8 +11,6 @@ import { Random } from 'random-js';
 import { useCorrect, useError, useClick } from '@/shared/hooks/useAudio';
 import Stars from '@/shared/components/Game/Stars';
 import { useCrazyModeTrigger } from '@/features/CrazyMode/hooks/useCrazyModeTrigger';
-import { useStatsStore } from '@/features/Progress';
-import { useShallow } from 'zustand/react/shallow';
 import { useStopwatch } from 'react-timer-hook';
 import { GameBottomBar } from '@/shared/components/Game/GameBottomBar';
 import { useThemePreferences } from '@/features/Preferences/facade/useThemePreferences';
@@ -79,7 +77,6 @@ const DEMO_KANJI = [
   { kanji: '子', meaning: 'child', reading: 'ko' },
   { kanji: '女', meaning: 'woman', reading: 'onna' },
 ];
-
 
 type QuestionType = 'kana' | 'kanji'; // | 'vocab' - vocab commented out for now
 
@@ -349,39 +346,11 @@ const DemoGame = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const totalTimeStopwatch = useStopwatch({ autoStart: true });
 
-  const {
-    score,
-    setScore,
-    stars,
-    setStars,
-    incrementWrongStreak,
-    resetWrongStreak,
-    recordAnswerTime,
-    incrementCorrectAnswers,
-    incrementWrongAnswers,
-    addCorrectAnswerTime,
-    numCorrectAnswers,
-    numWrongAnswers,
-    currentStreak,
-    saveSession,
-  } = useStatsStore(
-    useShallow(state => ({
-      score: state.score,
-      setScore: state.setScore,
-      stars: state.stars,
-      setStars: state.setStars,
-      incrementWrongStreak: state.incrementWrongStreak,
-      resetWrongStreak: state.resetWrongStreak,
-      recordAnswerTime: state.recordAnswerTime,
-      incrementCorrectAnswers: state.incrementCorrectAnswers,
-      incrementWrongAnswers: state.incrementWrongAnswers,
-      addCorrectAnswerTime: state.addCorrectAnswerTime,
-      numCorrectAnswers: state.numCorrectAnswers,
-      numWrongAnswers: state.numWrongAnswers,
-      currentStreak: state.currentStreak,
-      saveSession: state.saveSession,
-    })),
-  );
+  const [score, setScore] = useState(0);
+  const [stars, setStars] = useState(0);
+  const [numCorrectAnswers, setNumCorrectAnswers] = useState(0);
+  const [numWrongAnswers, setNumWrongAnswers] = useState(0);
+  const [currentStreak, setCurrentStreak] = useState(0);
 
   const [bottomBarState, setBottomBarState] = useState<BottomBarState>('check');
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -495,15 +464,12 @@ const DemoGame = () => {
       placedTiles[0] === currentQuestion.correctAnswer;
 
     if (isCorrect) {
-      addCorrectAnswerTime(answerTimeMs / 1000);
-      recordAnswerTime(answerTimeMs);
       speedStopwatch.reset();
 
       playCorrect();
       triggerCrazyMode();
-      resetWrongStreak();
-
-      incrementCorrectAnswers();
+      setNumCorrectAnswers(prev => prev + 1);
+      setCurrentStreak(prev => prev + 1);
       setScore(score + 1);
       setBottomBarState('correct');
       setIsCelebrating(true);
@@ -511,8 +477,8 @@ const DemoGame = () => {
       speedStopwatch.reset();
       playErrorTwice();
       triggerCrazyMode();
-      incrementWrongStreak();
-      incrementWrongAnswers();
+      setNumWrongAnswers(prev => prev + 1);
+      setCurrentStreak(0);
 
       if (score - 1 >= 0) {
         setScore(score - 1);
@@ -527,14 +493,8 @@ const DemoGame = () => {
     playCorrect,
     playErrorTwice,
     triggerCrazyMode,
-    resetWrongStreak,
-    incrementWrongStreak,
-    incrementCorrectAnswers,
-    incrementWrongAnswers,
     score,
     setScore,
-    addCorrectAnswerTime,
-    recordAnswerTime,
   ]);
 
   // Handle Continue button (only for correct answers)
@@ -578,7 +538,6 @@ const DemoGame = () => {
 
   const handleExit = () => {
     playClick();
-    saveSession();
   };
 
   if (!currentQuestion) {
