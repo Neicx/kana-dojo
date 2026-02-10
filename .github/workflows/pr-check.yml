@@ -54,28 +54,6 @@ jobs:
         if: steps.pr_state.outputs.should_run == 'true'
         run: npm ci
 
-      - name: Prettier check (changed files only)
-        if: steps.pr_state.outputs.should_run == 'true'
-        shell: bash
-        run: |
-          git fetch origin "${{ github.base_ref }}" --depth=1
-
-          changed_files=$(git diff --name-only --diff-filter=ACMRT "origin/${{ github.base_ref }}...HEAD" || true)
-          if [ -z "$changed_files" ]; then
-            echo "No changed files detected."
-            exit 0
-          fi
-
-          prettier_files=$(echo "$changed_files" | grep -E '\\.(ts|tsx|js|jsx|json|md|yaml|yml|css|scss|html)$' || true)
-          if [ -z "$prettier_files" ]; then
-            echo "No Prettier-supported files changed."
-            exit 0
-          fi
-
-          echo "Running Prettier check on:"
-          echo "$prettier_files"
-          npx prettier --check $prettier_files
-
       - name: Run full check
         if: steps.pr_state.outputs.should_run == 'true'
         run: npm run check
