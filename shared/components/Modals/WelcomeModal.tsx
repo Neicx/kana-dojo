@@ -461,7 +461,7 @@ const WelcomeModal = () => {
                           // Determine background
                           const background = isChaosTheme
                             ? CHAOS_THEME_GRADIENT
-                            : isHovered
+                            : isPremiumTheme && isHovered
                               ? theme.cardColor
                               : theme.backgroundColor;
 
