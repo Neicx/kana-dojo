@@ -733,7 +733,9 @@
     "mainColor": "oklch(80.0% 0.175 55.0 / 1)",
     "secondaryColor": "oklch(72.0% 0.195 20.0 / 1)",
     "issued": false,
-    "completed": false
+    "completed": true,
+    "completedBy": "Godson-Ozioma",
+    "completedPR": 5013
   },
   {
     "id": "frozen-lake",
