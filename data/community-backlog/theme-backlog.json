@@ -327,7 +327,9 @@
     "mainColor": "oklch(65.0% 0.225 30.0 / 1)",
     "secondaryColor": "oklch(90.0% 0.055 95.0 / 1)",
     "issued": true,
-    "completed": false
+    "completed": true,
+    "completedBy": "hewiga",
+    "completedPR": 5023
   },
   {
     "id": "rice-field-gold",
