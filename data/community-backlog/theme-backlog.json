@@ -415,7 +415,7 @@
     "mainColor": "oklch(82.0% 0.155 85.0 / 1)",
     "secondaryColor": "oklch(65.0% 0.180 30.0 / 1)",
     "issued": false,
-    "completed": false,
+    "completed": true,
     "completedBy": "SachinB0101",
     "completedPR": 4822
   },
@@ -427,7 +427,7 @@
     "mainColor": "oklch(75.0% 0.175 195.0 / 1)",
     "secondaryColor": "oklch(80.0% 0.195 330.0 / 1)",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": "tea-ceremony",
@@ -436,7 +436,7 @@
     "backgroundColor": "oklch(25.0% 0.028 145.0 / 1)",
     "mainColor": "oklch(62.0% 0.115 135.0 / 1)",
     "secondaryColor": "oklch(75.0% 0.075 90.0 / 1)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
