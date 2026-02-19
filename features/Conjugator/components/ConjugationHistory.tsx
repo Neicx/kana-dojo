@@ -49,28 +49,19 @@ export default function ConjugationHistory({
   if (entries.length === 0) {
     return (
       <div
-        className={cn(
-          'flex flex-col items-center justify-center rounded-3xl px-6 py-12 text-center',
-          'border border-dashed border-(--border-color)/50 bg-(--card-color)/20',
-          'text-(--secondary-color)',
-        )}
+        className='flex flex-col items-start gap-8 py-10 text-left'
         role='region'
         aria-label='Conjugation history'
       >
-        <div
-          className={cn(
-            'mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-(--secondary-color)/5',
-          )}
-          aria-hidden='true'
-        >
-          <History className='h-8 w-8 opacity-20' />
+        <div className='flex items-center gap-4'>
+          <div className='h-1.5 w-1.5 rounded-full bg-(--main-color) opacity-20' />
+          <h4 className='text-[10px] font-black tracking-[0.4em] text-(--secondary-color) uppercase opacity-30'>
+            Log: Idle
+          </h4>
         </div>
-        <h4 className='text-sm font-black tracking-widest uppercase opacity-40'>
-          Archive Empty
-        </h4>
-        <p className='mt-2 text-xs leading-relaxed font-medium opacity-30'>
-          Your linguistic transformations will be archived here for quick
-          retrieval.
+        <p className='text-xl leading-relaxed font-medium text-(--secondary-color) opacity-20'>
+          Transformation archive currently inactive. Begin synthesis to record
+          linguistic morphs.
         </p>
       </div>
     );

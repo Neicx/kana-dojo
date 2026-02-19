@@ -81,16 +81,13 @@ export default function ConjugatorInput({
 
   return (
     <div
-      className='group relative flex w-full flex-col gap-10 transition-all duration-700'
+      className='group relative flex w-full flex-col gap-16 transition-all duration-1000'
       role='search'
       aria-label='Japanese verb conjugation input'
     >
-      {/* Input Field Container - The Hero Element */}
-      <div className='relative flex flex-col gap-6'>
+      {/* Input Field - The Ghost Focal Point */}
+      <div className='relative flex flex-col gap-8'>
         <div className='relative flex items-center'>
-          {/* Subtle architectural background for the input only */}
-          <div className='absolute -inset-1 rounded-[2rem] bg-gradient-to-r from-(--main-color)/20 via-(--main-color)/5 to-(--main-color)/20 opacity-0 blur-xl transition-opacity duration-1000 group-focus-within:opacity-100' />
-
           <input
             ref={inputRef}
             type='text'
@@ -100,13 +97,10 @@ export default function ConjugatorInput({
             disabled={isDisabled}
             placeholder='e.g. 食べる, 行く, する...'
             className={cn(
-              'relative h-24 w-full rounded-3xl px-10 sm:h-32 sm:px-14',
-              'bg-(--background-color)/40 text-4xl text-(--main-color) placeholder:text-(--secondary-color)/20 sm:text-6xl',
-              'font-japanese tracking-tighter backdrop-blur-3xl',
-              'border border-(--border-color)/20 shadow-2xl shadow-black/5 transition-all duration-500',
-              'focus:scale-[1.01] focus:border-(--main-color)/40 focus:ring-0 focus:outline-none',
-              error && 'border-red-500/50',
-              isDisabled && 'cursor-not-allowed opacity-60',
+              'h-32 w-full bg-transparent p-0 text-6xl font-black text-(--main-color) placeholder:text-(--secondary-color)/10 sm:h-48 sm:text-8xl lg:text-9xl',
+              'font-japanese tracking-tighter transition-all duration-700 focus:outline-none',
+              error ? 'text-red-500/80' : 'focus:text-(--main-color)',
+              isDisabled && 'cursor-not-allowed opacity-20',
             )}
             aria-labelledby='verb-input-label'
             aria-describedby={
@@ -120,48 +114,50 @@ export default function ConjugatorInput({
             lang='ja'
           />
 
-          {/* Search Icon (floating inside) */}
-          <div className='absolute left-6 hidden opacity-20 sm:block'>
-            <Search className='h-8 w-8 text-(--main-color)' />
-          </div>
+          {/* Precision Architectural Line (Replaces the box) */}
+          <div
+            className={cn(
+              'absolute bottom-0 left-0 h-[2px] w-full transition-all duration-1000',
+              error
+                ? 'bg-red-500'
+                : 'bg-gradient-to-r from-(--main-color) via-(--main-color)/20 to-transparent',
+              'opacity-20 group-focus-within:h-1 group-focus-within:opacity-100',
+            )}
+          />
 
-          {/* Clear button */}
+          {/* Clear button - Integrated Icon */}
           {value.length > 0 && !isDisabled && (
             <button
               onClick={handleClear}
-              className={cn(
-                'absolute right-8 flex h-12 w-12 items-center justify-center rounded-full transition-all sm:right-10',
-                'bg-(--secondary-color)/5 text-(--secondary-color) hover:bg-(--secondary-color)/10 hover:text-(--main-color)',
-              )}
+              className='absolute right-0 flex h-20 w-20 items-center justify-center text-(--secondary-color) opacity-20 transition-all hover:text-(--main-color) hover:opacity-100'
               aria-label='Clear input field'
             >
-              <X className='h-6 w-6' aria-hidden='true' />
+              <X className='h-10 w-10' aria-hidden='true' />
             </button>
           )}
         </div>
 
-        {/* Floating Hint Overlay */}
+        {/* Floating Label - Dynamic position */}
         <p
-          className='absolute -top-8 left-4 text-[10px] font-black tracking-[0.4em] text-(--secondary-color) uppercase opacity-30'
+          className={cn(
+            'text-[10px] font-black tracking-[0.6em] text-(--secondary-color) uppercase opacity-30 transition-all duration-700',
+            'group-focus-within:text-(--main-color) group-focus-within:opacity-100',
+          )}
           id='verb-input-hint'
         >
-          Morphology Engine Input
+          {isLoading ? 'Processing Request' : 'Morphology Engine Focal Point'}
         </p>
 
-        {/* Error Message Section - Floating below input */}
+        {/* Error Message - Pure Typography */}
         {error && (
           <div
             id='input-error'
-            className={cn(
-              'absolute -bottom-16 left-0 flex items-center gap-3 rounded-2xl px-6 py-3',
-              'border border-red-500/20 bg-red-500/5 backdrop-blur-md',
-              'animate-in fade-in slide-in-from-top-4 text-xs font-black tracking-widest text-red-500 uppercase',
-            )}
+            className='animate-in fade-in slide-in-from-top-4 flex items-center gap-4 text-xs font-black tracking-widest text-red-500 uppercase'
             role='alert'
             aria-live='polite'
           >
             <div className='h-1.5 w-1.5 animate-pulse rounded-full bg-red-500' />
-            {getErrorMessage(error)}
+            <span>{getErrorMessage(error)}</span>
           </div>
         )}
       </div>

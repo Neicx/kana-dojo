@@ -127,62 +127,57 @@ export default function ConjugatorPage({ locale = 'en' }: ConjugatorPageProps) {
       role='main'
       aria-label='Japanese verb conjugator'
     >
-      {/* Immersive Header Section */}
-      <header className='relative mb-20 flex flex-col items-center text-center'>
-        <div className='absolute -top-10 -left-10 h-64 w-64 rounded-full bg-(--main-color)/5 blur-3xl' />
-
-        <div className='flex flex-col items-center'>
-          <div
-            className='mb-8 flex h-16 w-16 items-center justify-center rounded-3xl bg-(--background-color) shadow-2xl ring-1 shadow-black/5 ring-(--border-color)/20'
-            aria-hidden='true'
-          >
-            <Languages className='h-8 w-8 text-(--main-color)' />
-          </div>
-
-          <h1 className='relative flex flex-col items-center gap-2'>
-            <span className='text-xs font-black tracking-[0.5em] text-(--secondary-color) uppercase opacity-40'>
+      {/* Immersive Header Section - Pure Alignment */}
+      <header className='relative mb-32 flex flex-col items-start'>
+        <div className='flex flex-col gap-10'>
+          <div className='flex items-center gap-6' aria-hidden='true'>
+            <Languages className='h-10 w-10 text-(--main-color) opacity-20' />
+            <div className='h-[1px] w-12 bg-(--main-color)/20' />
+            <span className='text-[10px] font-black tracking-[0.6em] text-(--secondary-color) uppercase opacity-30'>
               The Grand Lexicon
             </span>
-            <span className='flex flex-col text-5xl font-black tracking-tighter text-(--main-color) sm:text-7xl lg:text-9xl'>
-              <span>Japanese Verb</span>
-              <span className='font-serif text-(--secondary-color) italic opacity-80 sm:-mt-4'>
-                Conjugator
-              </span>
+          </div>
+
+          <h1 className='flex flex-col text-6xl font-black tracking-tighter text-(--main-color) sm:text-8xl lg:text-[10rem]'>
+            <span>Japanese Verb</span>
+            <span className='font-serif text-(--secondary-color) italic opacity-80 sm:-mt-8'>
+              Conjugator
             </span>
           </h1>
 
-          <p className='mt-10 max-w-xl text-lg leading-relaxed font-medium text-(--secondary-color) opacity-60 sm:text-2xl'>
+          <p className='max-w-xl text-xl leading-relaxed font-medium text-(--secondary-color) opacity-40 sm:text-3xl'>
             Precision morphological synthesis. Explore every transformation with
             surgical clarity.
           </p>
         </div>
 
-        {/* Share Result (Integrated into the background flow) */}
+        {/* Sync Result Action - Pure Typography */}
         {result && (
-          <div className='animate-in fade-in zoom-in mt-10 duration-700'>
+          <div className='animate-in fade-in slide-in-from-left-8 mt-16 duration-1000'>
             <button
               onClick={handleShare}
               className={cn(
-                'group flex items-center gap-4 rounded-full border border-(--border-color)/30 bg-(--background-color)/50 px-8 py-4 backdrop-blur-xl transition-all hover:scale-105 active:scale-95',
-                shareButtonState === 'copied' &&
-                  'border-transparent bg-green-500 text-white',
+                'group flex items-center gap-6 transition-all duration-500 hover:translate-x-4',
+                shareButtonState === 'copied'
+                  ? 'text-green-500'
+                  : 'text-(--main-color)',
               )}
             >
-              {shareButtonState === 'copied' ? (
-                <>
-                  <Check className='h-5 w-5' />
-                  <span className='text-sm font-black tracking-widest uppercase'>
-                    Copied
-                  </span>
-                </>
-              ) : (
-                <>
-                  <Share2 className='h-5 w-5 text-(--main-color)' />
-                  <span className='text-sm font-black tracking-widest text-(--main-color) uppercase'>
-                    Sync Result
-                  </span>
-                </>
-              )}
+              <div className='h-1.5 w-1.5 rounded-full bg-current' />
+              <div className='flex items-center gap-4'>
+                <span className='text-xs font-black tracking-[0.4em] uppercase'>
+                  {shareButtonState === 'copied'
+                    ? 'Link Archived'
+                    : 'Synchronize Result'}
+                </span>
+                <Share2
+                  className={cn(
+                    'h-4 w-4 opacity-40 transition-all group-hover:opacity-100',
+                    shareButtonState === 'copied' && 'hidden',
+                  )}
+                />
+                {shareButtonState === 'copied' && <Check className='h-4 w-4' />}
+              </div>
             </button>
           </div>
         )}
@@ -192,12 +187,8 @@ export default function ConjugatorPage({ locale = 'en' }: ConjugatorPageProps) {
       <div className='relative flex flex-col lg:flex-row lg:items-start lg:gap-16'>
         {/* Main Interaction Canvas */}
         <div className='flex flex-1 flex-col gap-24'>
-          {/* Persistent Core Input Field - Elevated, not carded */}
-          <section
-            className='relative z-10 mx-auto w-full max-w-4xl'
-            aria-label='Verb Search'
-          >
-            <div className='absolute -inset-4 rounded-[3rem] bg-gradient-to-b from-(--main-color)/5 to-transparent opacity-50 blur-2xl' />
+          {/* Persistent Core Input Field - Zero Box, Pure Signal */}
+          <section className='w-full' aria-label='Verb Search'>
             <ConjugatorInput
               value={inputText}
               onChange={setInputText}

@@ -28,91 +28,93 @@ export default function VerbInfoCard({ verb }: VerbInfoCardProps) {
 
   return (
     <div
-      className='flex flex-col gap-16 transition-all duration-700'
+      className='flex flex-col gap-20 transition-all duration-1000'
       role='region'
       aria-label={`Verb information for ${verb.dictionaryForm}`}
     >
-      {/* Main info header - Massive Typography */}
-      <div className='flex flex-col gap-12'>
-        <div className='flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between'>
-          <div className='flex items-start gap-8'>
-            <div className='flex flex-col gap-4'>
-              <div className='flex items-center gap-4'>
-                <div className='h-3 w-3 rounded-full bg-(--main-color)' />
-                <span className='text-xs font-black tracking-[0.4em] text-(--secondary-color) uppercase opacity-40'>
-                  Primary Entry
-                </span>
-              </div>
+      {/* Main info header - Pure Typography */}
+      <div className='flex flex-col gap-16'>
+        <div className='flex flex-col gap-12 sm:flex-row sm:items-end sm:justify-between'>
+          <div className='flex flex-col gap-6'>
+            <div className='flex items-center gap-6'>
+              <span className='text-[10px] font-black tracking-[0.6em] text-(--secondary-color) uppercase opacity-30'>
+                Linguistic Entry
+              </span>
+              <div className='h-[1px] w-16 bg-(--main-color)/20' />
+            </div>
 
-              <div className='flex flex-col'>
-                <h3
-                  className='font-japanese text-7xl font-black tracking-tighter text-(--main-color) sm:text-8xl lg:text-9xl'
-                  lang='ja'
-                >
-                  {verb.dictionaryForm}
-                </h3>
-                <div className='flex items-center gap-6 text-xl font-medium text-(--secondary-color) opacity-40 sm:text-3xl'>
-                  <span className='font-japanese' lang='ja'>
-                    {verb.reading}
-                  </span>
-                  <div className='h-2 w-2 rounded-full bg-(--border-color)' />
-                  <span className='italic'>{verb.romaji}</span>
-                </div>
+            <div className='flex flex-col gap-2'>
+              <h3
+                className='font-japanese text-8xl font-black tracking-tighter text-(--main-color) sm:text-9xl lg:text-[10rem] xl:text-[12rem]'
+                lang='ja'
+              >
+                {verb.dictionaryForm}
+              </h3>
+              <div className='flex items-center gap-8 text-2xl font-medium text-(--secondary-color) opacity-50 sm:text-4xl'>
+                <span className='font-japanese' lang='ja'>
+                  {verb.reading}
+                </span>
+                <span className='text-(--main-color)/20'>/</span>
+                <span className='italic'>{verb.romaji}</span>
               </div>
             </div>
           </div>
 
-          <div className='flex flex-col items-end gap-2 text-right'>
-            <span className='text-[10px] font-black tracking-widest text-(--main-color) uppercase opacity-30'>
-              Object Status
+          <div className='flex flex-col items-end gap-3 pb-4 text-right'>
+            <span className='text-[10px] font-black tracking-[0.4em] text-(--main-color) uppercase opacity-20'>
+              Verification
             </span>
-            <span className='text-xl font-black text-(--main-color)'>
-              Verified Synthesis
+            <span className='text-3xl font-black tracking-tighter text-(--main-color)'>
+              Precision Synthesized
             </span>
           </div>
         </div>
 
-        {/* Informational Grid - Architectural, not boxes */}
+        {/* Informational Catalog - Zero Boxes, Pure Alignment */}
         <div
-          className='grid grid-cols-1 gap-12 sm:grid-cols-3'
+          className='flex flex-wrap items-center gap-x-20 gap-y-12'
           role='group'
           aria-label='Verb classification details'
         >
           {/* Verb Type */}
-          <div className='flex flex-col gap-4'>
-            <div className='h-[1px] w-full bg-(--border-color)/30' />
-            <span className='text-[10px] font-black tracking-[0.4em] text-(--secondary-color) uppercase opacity-30'>
-              Linguistic Class
+          <div className='flex flex-col gap-2'>
+            <span className='text-[9px] font-black tracking-[0.5em] text-(--secondary-color) uppercase opacity-30'>
+              Grammar Class
             </span>
             <span
-              className={cn('text-2xl font-black', verbTypeInfo.colorClass)}
+              className={cn(
+                'text-3xl font-black tracking-tighter',
+                verbTypeInfo.colorClass,
+              )}
             >
               {verbTypeInfo.label}
             </span>
           </div>
 
+          <div className='hidden h-12 w-[1px] bg-(--border-color)/30 sm:block' />
+
           {/* Stem */}
-          <div className='flex flex-col gap-4'>
-            <div className='h-[1px] w-full bg-(--border-color)/30' />
-            <span className='text-[10px] font-black tracking-[0.4em] text-(--secondary-color) uppercase opacity-30'>
+          <div className='flex flex-col gap-2'>
+            <span className='text-[9px] font-black tracking-[0.5em] text-(--secondary-color) uppercase opacity-30'>
               Root Segment
             </span>
             <span
-              className='font-japanese text-3xl font-black text-(--main-color)'
+              className='font-japanese text-4xl font-black tracking-tighter text-(--main-color)'
               lang='ja'
             >
               {verb.stem || '—'}
             </span>
           </div>
 
+          <div className='hidden h-12 w-[1px] bg-(--border-color)/30 sm:block' />
+
           {/* Ending */}
-          <div className='flex flex-col gap-4'>
-            <div className='h-[1px] w-full bg-(--border-color)/30' />
-            <span className='text-[10px] font-black tracking-[0.4em] text-(--secondary-color) uppercase opacity-30'>
+          <div className='flex flex-col gap-2'>
+            <span className='text-[9px] font-black tracking-[0.5em] text-(--secondary-color) uppercase opacity-30'>
               Terminator
             </span>
             <span
-              className='font-japanese text-3xl font-black text-(--main-color)'
+              className='font-japanese text-4xl font-black tracking-tighter text-(--main-color)'
               lang='ja'
             >
               {verb.ending || '—'}
@@ -120,22 +122,19 @@ export default function VerbInfoCard({ verb }: VerbInfoCardProps) {
           </div>
         </div>
 
-        {/* Compound Alert - Seamless bar */}
+        {/* Compound Alert - Minimalist Integrated Line */}
         {verb.compoundPrefix && (
-          <div className='animate-in fade-in flex items-center gap-6 rounded-2xl bg-(--main-color)/5 p-6 duration-500'>
-            <Info className='h-6 w-6 text-(--main-color) opacity-50' />
-            <div className='flex flex-col gap-0.5'>
-              <span className='text-[9px] font-black tracking-widest text-(--main-color) uppercase opacity-40'>
-                Complex Morph Detected
+          <div className='flex items-center gap-8 border-l border-(--main-color)/20 py-2 pl-8'>
+            <div className='flex h-2 w-2 rounded-full bg-(--main-color)' />
+            <div className='flex items-baseline gap-4'>
+              <span className='text-[10px] font-black tracking-widest text-(--main-color) uppercase opacity-40'>
+                Complex Morph Detected:
               </span>
-              <span className='text-sm font-medium text-(--main-color) opacity-80'>
-                Prefix identified:{' '}
-                <span
-                  className='font-japanese font-black underline decoration-(--main-color)/20'
-                  lang='ja'
-                >
-                  {verb.compoundPrefix}
-                </span>
+              <span
+                className='font-japanese text-xl font-black text-(--main-color) opacity-80'
+                lang='ja'
+              >
+                {verb.compoundPrefix}
               </span>
             </div>
           </div>

@@ -69,14 +69,14 @@ export default function ConjugationCategory({
 
   return (
     <div
-      className='group flex flex-col transition-all duration-700'
+      className='group flex flex-col transition-all duration-1000'
       role='listitem'
     >
-      {/* Category header - Architectural row */}
+      {/* Category header - Pure Alignment */}
       <button
         onClick={onToggle}
         className={cn(
-          'flex items-center justify-between py-8 transition-all duration-500',
+          'flex items-center justify-between py-12 transition-all duration-500',
           'cursor-pointer focus:outline-none',
         )}
         aria-expanded={isExpanded}
@@ -84,79 +84,77 @@ export default function ConjugationCategory({
         aria-label={`${categoryInfo.name} (${categoryInfo.nameJa}), ${forms.length} forms. ${isExpanded ? 'Collapse' : 'Expand'}`}
       >
         <div className='flex items-center gap-10'>
-          {/* Minimalist icon marker */}
+          {/* Subtle colored marker */}
           <div
             className={cn(
-              'flex h-16 w-16 items-center justify-center rounded-full transition-all duration-700',
-              categoryInfo.bgClass,
+              'h-1.5 w-1.5 rounded-full transition-all duration-1000',
               isExpanded
-                ? 'scale-110 shadow-2xl shadow-black/10'
-                : 'opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0',
+                ? 'scale-[3] shadow-lg'
+                : 'opacity-40 group-hover:scale-[2]',
+              categoryInfo.colorClass, // Changed from bgClass to colorClass
             )}
+            style={{ backgroundColor: categoryInfo.color }} // We'll need to update the info function
             aria-hidden='true'
-          >
-            {categoryInfo.icon}
-          </div>
+          />
 
           <div className='flex flex-col text-left'>
             <h4
               className={cn(
-                'text-4xl font-black tracking-tighter transition-all duration-500',
+                'text-5xl font-black tracking-tighter transition-all duration-700',
                 isExpanded
-                  ? 'origin-left scale-105 text-(--main-color)'
-                  : 'text-(--secondary-color) opacity-40 group-hover:opacity-100',
+                  ? 'text-(--main-color)'
+                  : 'text-(--secondary-color) opacity-20 group-hover:opacity-100',
               )}
             >
               {categoryInfo.name}
             </h4>
-            <div className='mt-2 flex items-center gap-4'>
+            <div className='mt-2 flex items-center gap-6'>
               <span className='font-japanese text-sm font-bold tracking-widest text-(--main-color) opacity-20'>
                 {categoryInfo.nameJa}
               </span>
-              <div className='h-[1px] w-8 bg-(--border-color)/50' />
-              <span className='text-[10px] font-black tracking-[0.3em] text-(--secondary-color) uppercase opacity-20'>
-                {forms.length} Synthesized
+              <span className='text-[10px] font-black tracking-[0.4em] text-(--secondary-color) uppercase opacity-10'>
+                {forms.length} Entries
               </span>
             </div>
           </div>
         </div>
 
-        <div className='flex items-center gap-8'>
+        <div className='flex items-center gap-12'>
           <div
             className={cn(
-              'hidden h-[1px] w-32 bg-gradient-to-r from-transparent to-(--border-color)/30 transition-all duration-700 sm:block',
+              'hidden h-[1px] w-64 bg-gradient-to-r from-transparent via-(--border-color)/20 to-transparent transition-all duration-1000 lg:block',
               isExpanded ? 'opacity-0' : 'opacity-100',
             )}
           />
           <div
             className={cn(
-              'flex h-12 w-12 items-center justify-center rounded-full transition-all duration-500',
+              'transition-all duration-700',
               isExpanded
-                ? 'rotate-180 bg-(--main-color) text-white shadow-(--main-color)/20 shadow-xl'
-                : 'border border-(--border-color)/30 text-(--secondary-color) opacity-30 group-hover:opacity-100',
+                ? 'rotate-180 text-(--main-color)'
+                : 'text-(--secondary-color) opacity-20 group-hover:opacity-100',
             )}
           >
-            <ChevronDown className='h-5 w-5' aria-hidden='true' />
+            <ChevronDown className='h-6 w-6' aria-hidden='true' />
           </div>
         </div>
       </button>
 
-      {/* Forms list - Integrated flow */}
+      {/* Forms list - Flowing directly on canvas */}
       <div
         id={`category-${category}`}
         className={cn(
-          'grid transition-all duration-700 ease-in-out',
+          'grid transition-all duration-1000 ease-in-out',
           isExpanded
-            ? 'mt-8 grid-rows-[1fr] opacity-100'
+            ? 'grid-rows-[1fr] opacity-100'
             : 'grid-rows-[0fr] opacity-0',
         )}
         role='region'
         aria-label={`${categoryInfo.name} conjugation forms`}
         hidden={!isExpanded}
       >
-        <div className='ml-8 overflow-hidden border-l-2 border-(--main-color)/5 pl-10'>
+        <div className='overflow-hidden'>
           <div
-            className='flex flex-col gap-4'
+            className='flex flex-col gap-0'
             role='list'
             aria-label={`${forms.length} ${categoryInfo.name.toLowerCase()} forms`}
           >
@@ -198,49 +196,45 @@ function FormRow({
   return (
     <div
       className={cn(
-        'group flex items-center justify-between gap-6 px-8 py-6 transition-all duration-300',
-        'focus-within:bg-(--main-color)/5 hover:bg-(--main-color)/5',
-        'animate-in fade-in slide-in-from-left-4 duration-500',
+        'group flex items-center justify-between gap-8 py-10 transition-all duration-500',
+        'border-b border-(--border-color)/10 last:border-0',
+        'animate-in fade-in slide-in-from-left-8 duration-700',
       )}
-      style={{ animationDelay: `${index * 50}ms` }}
+      style={{ animationDelay: `${index * 40}ms` }}
       role='listitem'
     >
       {/* Form info */}
-      <div className='flex min-w-0 flex-1 flex-col gap-3'>
-        <div className='flex items-baseline gap-4'>
+      <div className='flex min-w-0 flex-1 flex-col gap-4'>
+        <div className='flex items-baseline gap-6'>
           <span
-            className='font-japanese text-3xl font-black text-(--main-color) sm:text-4xl'
+            className='font-japanese text-4xl font-black text-(--main-color) sm:text-5xl'
             lang='ja'
           >
             {form.kanji}
           </span>
           {form.kanji !== form.hiragana && (
             <span
-              className='font-japanese text-lg font-medium text-(--secondary-color) opacity-40'
+              className='font-japanese text-xl font-medium text-(--secondary-color) opacity-30'
               lang='ja'
-              aria-label={`Reading: ${form.hiragana}`}
             >
               {form.hiragana}
             </span>
           )}
         </div>
-        <div className='flex flex-wrap items-center gap-4'>
-          <div className='flex items-center gap-1.5'>
-            <span className='h-1 w-1 rounded-full bg-(--main-color)' />
-            <span className='text-[10px] font-black tracking-widest text-(--secondary-color) uppercase opacity-60'>
+        <div className='flex flex-wrap items-center gap-6'>
+          <div className='flex items-center gap-3'>
+            <span className='text-[10px] font-black tracking-[0.4em] text-(--secondary-color) uppercase opacity-40'>
               {form.name}
             </span>
           </div>
-          <div className='h-4 w-[1px] bg-(--border-color)/40' />
-          <span
-            className='font-mono text-[11px] font-bold tracking-tight text-(--secondary-color) opacity-40'
-            aria-label={`Romaji: ${form.romaji}`}
-          >
+          <div className='h-3 w-[1px] bg-(--border-color)/20' />
+          <span className='font-mono text-[11px] font-bold tracking-widest text-(--secondary-color) opacity-30'>
             {form.romaji}
           </span>
           {form.formality === 'polite' && (
-            <div className='flex items-center gap-2 rounded-md bg-blue-500/5 px-2 py-0.5 ring-1 ring-blue-500/20'>
-              <span className='text-[9px] font-black tracking-widest text-blue-500 uppercase'>
+            <div className='flex items-center gap-2'>
+              <div className='h-1.5 w-1.5 rounded-full bg-blue-500/40' />
+              <span className='text-[9px] font-black tracking-[0.3em] text-blue-500/60 uppercase'>
                 Polite
               </span>
             </div>
@@ -248,29 +242,21 @@ function FormRow({
         </div>
       </div>
 
-      {/* Copy icon button (Material ghost style) */}
+      {/* Copy icon button - Pure Icon */}
       <button
         onClick={handleCopy}
         className={cn(
-          'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl transition-all duration-500 active:scale-90',
-          'border border-transparent bg-transparent',
-          'hover:border-(--main-color)/20 hover:bg-(--main-color)/10 hover:text-(--main-color)',
-          'opacity-0 group-hover:opacity-100 focus:opacity-100',
-          copied &&
-            'border-transparent bg-green-500 text-white opacity-100 hover:bg-green-600',
+          'flex h-12 w-12 shrink-0 items-center justify-center transition-all duration-500 active:scale-90',
+          'text-(--secondary-color) opacity-0 group-hover:opacity-100 focus:opacity-100',
+          copied && 'text-green-500 opacity-100',
         )}
-        aria-label={
-          copied
-            ? `${form.name} copied to clipboard`
-            : `Copy ${form.name}: ${form.kanji}`
-        }
-        aria-live='polite'
+        aria-label={copied ? 'Copied' : 'Copy'}
       >
         {copied ? (
           <Check className='h-6 w-6' aria-hidden='true' />
         ) : (
           <Copy
-            className='h-5 w-5 text-(--secondary-color) group-hover:text-(--main-color)'
+            className='h-5 w-5 hover:text-(--main-color)'
             aria-hidden='true'
           />
         )}
@@ -285,96 +271,96 @@ function FormRow({
 function getCategoryInfo(category: CategoryType): {
   name: string;
   nameJa: string;
-  icon: React.ReactNode;
-  bgClass: string;
+  colorClass: string;
+  color: string;
 } {
   const categories: Record<
     CategoryType,
-    { name: string; nameJa: string; icon: React.ReactNode; bgClass: string }
+    { name: string; nameJa: string; colorClass: string; color: string }
   > = {
     basic: {
       name: 'Basic Forms',
       nameJa: '基本形',
-      icon: <Edit3 className='h-6 w-6 text-blue-500' />,
-      bgClass: 'bg-blue-500/10',
+      colorClass: 'text-blue-500',
+      color: '#3b82f6',
     },
     polite: {
       name: 'Polite Forms',
       nameJa: '丁寧形',
-      icon: <Languages className='h-6 w-6 text-purple-500' />,
-      bgClass: 'bg-purple-500/10',
+      colorClass: 'text-purple-500',
+      color: '#a855f7',
     },
     negative: {
       name: 'Negative Forms',
       nameJa: '否定形',
-      icon: <XCircle className='h-6 w-6 text-red-500' />,
-      bgClass: 'bg-red-500/10',
+      colorClass: 'text-red-500',
+      color: '#ef4444',
     },
     past: {
       name: 'Past Forms',
       nameJa: '過去形',
-      icon: <History className='h-6 w-6 text-amber-500' />,
-      bgClass: 'bg-amber-500/10',
+      colorClass: 'text-amber-500',
+      color: '#f59e0b',
     },
     volitional: {
       name: 'Volitional Forms',
       nameJa: '意向形',
-      icon: <Lightbulb className='h-6 w-6 text-cyan-500' />,
-      bgClass: 'bg-cyan-500/10',
+      colorClass: 'text-cyan-500',
+      color: '#06b6d4',
     },
     potential: {
       name: 'Potential Forms',
       nameJa: '可能形',
-      icon: <Zap className='h-6 w-6 text-green-500' />,
-      bgClass: 'bg-green-500/10',
+      colorClass: 'text-green-500',
+      color: '#22c55e',
     },
     passive: {
       name: 'Passive Forms',
       nameJa: '受身形',
-      icon: <ShieldAlert className='h-6 w-6 text-indigo-500' />,
-      bgClass: 'bg-indigo-500/10',
+      colorClass: 'text-indigo-500',
+      color: '#6366f1',
     },
     causative: {
       name: 'Causative Forms',
       nameJa: '使役形',
-      icon: <ArrowRight className='h-6 w-6 text-orange-500' />,
-      bgClass: 'bg-orange-500/10',
+      colorClass: 'text-orange-500',
+      color: '#f97316',
     },
     'causative-passive': {
       name: 'Causative-Passive',
       nameJa: '使役受身形',
-      icon: <RotateCcw className='h-6 w-6 text-pink-500' />,
-      bgClass: 'bg-pink-500/10',
+      colorClass: 'text-pink-500',
+      color: '#ec4899',
     },
     imperative: {
       name: 'Imperative Forms',
       nameJa: '命令形',
-      icon: <AlertCircle className='h-6 w-6 text-yellow-500' />,
-      bgClass: 'bg-yellow-500/10',
+      colorClass: 'text-yellow-500',
+      color: '#eab308',
     },
     conditional: {
       name: 'Conditional Forms',
       nameJa: '条件形',
-      icon: <GitBranch className='h-6 w-6 text-teal-500' />,
-      bgClass: 'bg-teal-500/10',
+      colorClass: 'text-teal-500',
+      color: '#14b8a6',
     },
     'tai-form': {
       name: 'Desire Forms',
       nameJa: 'たい形',
-      icon: <Heart className='h-6 w-6 text-rose-500' />,
-      bgClass: 'bg-rose-500/10',
+      colorClass: 'text-rose-500',
+      color: '#f43f5e',
     },
     progressive: {
       name: 'Progressive Forms',
       nameJa: '進行形',
-      icon: <PlayCircle className='h-6 w-6 text-sky-500' />,
-      bgClass: 'bg-sky-500/10',
+      colorClass: 'text-sky-500',
+      color: '#0ea5e9',
     },
     honorific: {
       name: 'Honorific Forms',
       nameJa: '敬語',
-      icon: <Crown className='h-6 w-6 text-violet-500' />,
-      bgClass: 'bg-violet-500/10',
+      colorClass: 'text-violet-500',
+      color: '#8b5cf6',
     },
   };
 
@@ -382,8 +368,8 @@ function getCategoryInfo(category: CategoryType): {
     categories[category] || {
       name: category,
       nameJa: category,
-      icon: <FileText className='h-6 w-6 text-gray-500' />,
-      bgClass: 'bg-gray-500/10',
+      colorClass: 'text-gray-500',
+      color: '#6b7280',
     }
   );
 }
