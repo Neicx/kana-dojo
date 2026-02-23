@@ -50,9 +50,8 @@ export function formatOklch(
  * - Chroma increases for subtle vibrancy
  *
  * For light themes:
- * - Lightness increases toward white (cards are lighter than background)
- * - Chroma decreases to create a neutral, recessive surface
- * - This ensures colored text (mainColor/secondaryColor) pops beautifully
+ * - Lightness decreases slightly (cards are darker than background)
+ * - This creates a subtle gray paper surface against very light backgrounds
  *
  * @param backgroundColor - OKLCH background color string
  * @param isLight - Whether this is a light theme (uses group membership, not heuristic)
@@ -77,12 +76,10 @@ export function generateCardColor(
   let newC: number;
 
   if (isLight) {
-    // Light themes: make cards LIGHTER (toward white)
-    // This creates a subtle "elevated paper" effect and ensures
-    // vibrant colored text remains readable and beautiful
-    newL = Math.min(0.99, L + (1 - L) * 0.45);
-    // Desaturate to make the card neutral and recessive
-    newC = C * 0.5;
+    // Restore original light-theme behavior: darken cards slightly.
+    // For the base light theme (neutral white), this yields subtle gray cards.
+    newL = Math.max(0, L - (1 - L + 0.12) * lightnessBoost * 5);
+    newC = Math.min(0.37, C * chromaMultiplier);
   } else {
     // Dark themes: existing logic - make cards slightly lighter
     newL = Math.min(1, L + L * lightnessBoost);
@@ -100,8 +97,7 @@ export function generateCardColor(
  * - Chroma increases for subtle definition
  *
  * For light themes:
- * - Lightness decreases slightly to create subtle definition
- * - Chroma is reduced for a soft, elegant border
+ * - Lightness decreases more than cards to create subtle definition
  *
  * @param backgroundColor - OKLCH background color string
  * @param isLight - Whether this is a light theme
@@ -126,11 +122,9 @@ export function generateBorderColor(
   let newC: number;
 
   if (isLight) {
-    // Light themes: darken slightly for subtle border definition
-    // Not too dark - just enough to separate elements elegantly
-    newL = Math.max(0.7, L - (1 - L + 0.1) * 0.4);
-    // Reduce chroma for a soft, neutral border
-    newC = C * 0.6;
+    // Restore original light-theme behavior: darken borders more than cards.
+    newL = Math.max(0, L - (1 - L + 0.15) * lightnessBoost * 2);
+    newC = Math.min(0.37, C * chromaMultiplier);
   } else {
     // Dark themes: existing logic - make borders lighter than cards
     newL = Math.min(1, L + L * lightnessBoost);
