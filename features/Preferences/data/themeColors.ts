@@ -78,8 +78,8 @@ export function generateCardColor(
   if (isLight) {
     // Restore original light-theme behavior: darken cards slightly.
     // For the base light theme (neutral white), this yields subtle gray cards.
-    newL = Math.max(0, L - (1 - L + 0.12) * lightnessBoost * 5);
-    newC = Math.min(0.37, C * chromaMultiplier);
+    newL = Math.max(0, L - (1 - L + 0.12) * 0.15 * 5);
+    newC = Math.min(0.37, C * 1.2);
   } else {
     // Dark themes: existing logic - make cards slightly lighter
     newL = Math.min(1, L + L * lightnessBoost);
