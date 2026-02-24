@@ -1,7 +1,16 @@
-{
-  "japanese": "もう迷わない。",
-  "romaji": "Mou mayowanai.",
-  "english": "I won't hesitate anymore.",
-  "game": "Final Fantasy X",
-  "character": "Tidus"
-}
+[
+  {
+    "japanese": "もう迷わない。",
+    "romaji": "Mou mayowanai.",
+    "english": "I won't hesitate anymore.",
+    "game": "Final Fantasy X",
+    "character": "Tidus"
+  },
+  {
+    "japanese": "仲間を守る。",
+    "romaji": "Nakama o mamoru.",
+    "english": "I protect my friends.",
+    "game": "Kingdom Hearts",
+    "character": "Riku"
+  }
+]
