@@ -556,7 +556,7 @@
     "correct": "私は兄が二人います。",
     "explanation": "Use 兄 for your own older brother. (Pattern set 4)",
     "id": 70,
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
