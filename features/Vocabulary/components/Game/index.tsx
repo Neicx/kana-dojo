@@ -112,6 +112,7 @@ const Game = () => {
         />
         {gameMode.toLowerCase() === 'pick' ? (
           <WordBuildingGame
+            key={`vocab-wordbuilding-${sessionNonce}`}
             selectedWordObjs={selectedVocabObjs}
             isHidden={showStats || view !== 'playing'}
           />

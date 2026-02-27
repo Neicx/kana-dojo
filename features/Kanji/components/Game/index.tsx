@@ -124,6 +124,7 @@ const Game = () => {
           />
         ) : gameMode.toLowerCase() === 'word-building' ? (
           <WordBuildingGame
+            key={`kanji-wordbuilding-${sessionNonce}`}
             selectedKanjiObjs={selectedKanjiObjs}
             isHidden={showStats || view !== 'playing'}
           />

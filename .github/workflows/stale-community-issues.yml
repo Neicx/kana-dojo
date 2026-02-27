@@ -1,8 +1,6 @@
 name: Manage Stale Community Issues
 
 on:
-  schedule:
-    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:
