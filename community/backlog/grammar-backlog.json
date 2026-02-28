@@ -362,19 +362,19 @@
   {
     "id": 61,
     "text": "\"〜にとって\" means \"for / to (someone)\".",
-    "completed": false,
+    "completed": true,
     "issued": false
   },
   {
     "id": 62,
     "text": "\"〜につれて\" means \"as... changes, ... also changes\".",
-    "completed": false,
+    "completed": true,
     "issued": false
   },
   {
     "id": 63,
     "text": "\"〜に比べて\" means \"compared to...\".",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
